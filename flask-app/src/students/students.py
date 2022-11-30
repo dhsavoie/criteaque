@@ -3,14 +3,13 @@ import json
 from src import db
 
 
-customers = Blueprint('customers', __name__)
+students = Blueprint('students', __name__)
 
-# Get all customers from the DB
-@customers.route('/customers', methods=['GET'])
-def get_customers():
-    cursor = db.get_db().cursor()
-    cursor.execute('select customerNumber, customerName,\
-        creditLimit from customers')
+# Get all students from the DB
+@students.route('/students', methods=['GET'])
+def get_students():
+    cursor.execute('select studentNumber, studentName,\
+        creditLimit from students')
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
@@ -21,11 +20,11 @@ def get_customers():
     the_response.mimetype = 'application/json'
     return the_response
 
-# Get customer detail for customer with particular userID
-@customers.route('/customers/<userID>', methods=['GET'])
-def get_customer(userID):
+# Get student detail for student with particular userID
+@students.route('/students/<userID>', methods=['GET'])
+def get_student(userID):
     cursor = db.get_db().cursor()
-    cursor.execute('select * from customers where customerNumber = {0}'.format(userID))
+    cursor.execute('select * from students where studentNumber = {0}'.format(userID))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
