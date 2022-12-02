@@ -185,7 +185,7 @@ CREATE TABLE Review (
     WorkloadRating INT NOT NULL,
     DifficultyRating INT NOT NULL,
     EngagementRating INT NOT NULL,
-    OverallRating INT NOT NULL,
+    OverallRating INT AS ((WorkloadRating + DifficultyRating + EngagementRating)/3),
     StudentReviewer INT NOT NULL,
     ProfessorReviewed INT NOT NULL,
     PRIMARY KEY (ReviewID),
@@ -199,8 +199,8 @@ CREATE TABLE Review (
         ON UPDATE cascade ON DELETE restrict
 );
 
-insert into Review (ReviewID, Upvotes, Downvotes, ReviewContent, Class, WorkloadRating, DifficultyRating, EngagementRating, OverallRating, StudentReviewer, ProfessorReviewed) values (1, 0, 0, 'This class was very interesting and the professor was very engaging. I would recommend this class to anyone who is interested in health science.', 'HS1000', 3, 2, 4, 3, '007430669', '000827368');
-insert into Review (ReviewID, Upvotes, Downvotes, ReviewContent, Class, WorkloadRating, DifficultyRating, EngagementRating, OverallRating, StudentReviewer, ProfessorReviewed) values (2, 0, 0, 'This class was quite difficult and had a heavy workload, but the professor was very engaging.', 'HS1000', 4, 4, 4, 4, '007430669', '000827368');
+insert into Review (ReviewID, Upvotes, Downvotes, ReviewContent, Class, WorkloadRating, DifficultyRating, EngagementRating, OverallRating, StudentReviewer, ProfessorReviewed) values (1, 0, 0, 'This class was very interesting and the professor was very engaging. I would recommend this class to anyone who is interested in health science.', 'HS1000', 3, 2, 4, DEFAULT, '007430669', '000827368');
+insert into Review (ReviewID, Upvotes, Downvotes, ReviewContent, Class, WorkloadRating, DifficultyRating, EngagementRating, OverallRating, StudentReviewer, ProfessorReviewed) values (2, 0, 0, 'This class was quite difficult and had a heavy workload, but the professor was very engaging.', 'HS1000', 4, 4, 4, DEFAULT, '007430669', '000827368');
 
 CREATE TABLE Approval(
     DateApproved DATETIME DEFAULT CURRENT_TIMESTAMP,
