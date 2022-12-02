@@ -27,11 +27,17 @@ CREATE TABLE Department(
     PRIMARY KEY (DepartmentName)
 );
 
-insert into Department (DepartmentName, NumOfStudents, NumOfProfessors) values ('Engineering', 1935, 128);
-insert into Department (DepartmentName, NumOfStudents, NumOfProfessors) values ('Business', 2143, 178);
-insert into Department (DepartmentName, NumOfStudents, NumOfProfessors) values ('Health Science', 2214, 95);
-insert into Department (DepartmentName, NumOfStudents, NumOfProfessors) values ('English', 1607, 149);
-insert into Department (DepartmentName, NumOfStudents, NumOfProfessors) values ('History', 885, 92);
+-- Engineering, Business, Health Science, Computer Science, Art and Design, Science, Social Sciences
+insert into Department (DepartmentName, NumOfStudents, NumOfProfessors) values ('Health Science', 946, 12);
+insert into Department (DepartmentName, NumOfStudents, NumOfProfessors) values ('Science', 112, 46);
+insert into Department (DepartmentName, NumOfStudents, NumOfProfessors) values ('Business', 126, 2);
+insert into Department (DepartmentName, NumOfStudents, NumOfProfessors) values ('Social Sciences', 396, 27);
+insert into Department (DepartmentName, NumOfStudents, NumOfProfessors) values ('Computer Science', 619, 33);
+insert into Department (DepartmentName, NumOfStudents, NumOfProfessors) values ('Social Sciences', 844, 18);
+insert into Department (DepartmentName, NumOfStudents, NumOfProfessors) values ('Social Sciences', 445, 78);
+insert into Department (DepartmentName, NumOfStudents, NumOfProfessors) values ('Business', 852, 44);
+insert into Department (DepartmentName, NumOfStudents, NumOfProfessors) values ('Business', 123, 87);
+insert into Department (DepartmentName, NumOfStudents, NumOfProfessors) values ('Science', 497, 33);
 
 CREATE TABLE AdminDepartment(
     AdminID INT NOT NULL,
@@ -48,8 +54,8 @@ CREATE TABLE AdminDepartment(
 insert into AdminDepartment (AdminID, DepartmentName) values ('07386', 'Engineering');
 insert into AdminDepartment (AdminID, DepartmentName) values ('07023', 'Business');
 insert into AdminDepartment (AdminID, DepartmentName) values ('03560', 'Health Science');
-insert into AdminDepartment (AdminID, DepartmentName) values ('01090', 'English');
-insert into AdminDepartment (AdminID, DepartmentName) values ('03031', 'History');
+insert into AdminDepartment (AdminID, DepartmentName) values ('01090', 'Science');
+insert into AdminDepartment (AdminID, DepartmentName) values ('03031', 'Social Sciences');
 
 CREATE TABLE Major(
     Major VARCHAR(50) NOT NULL,
@@ -60,13 +66,14 @@ CREATE TABLE Major(
         REFERENCES Department(DepartmentName)
 );
 
-insert into Major (Major, Department) values ('Computer Science', 'Engineering');
+insert into Major (Major, Department) values ('Computer Science', 'Computer Science');
 insert into Major (Major, Department) values ('Electrical Engineering', 'Engineering');
 insert into Major (Major, Department) values ('Mechanical Engineering', 'Engineering');
 insert into Major (Major, Department) values ('Business Administration', 'Business');
 insert into Major (Major, Department) values ('Health Science', 'Health Science');
-insert into Major (Major, Department) values ('English', 'English');
-insert into Major (Major, Department) values ('History', 'History');
+insert into Major (Major, Department) values ('English', 'Social Sciences');
+insert into Major (Major, Department) values ('History', 'Social Sciences');
+insert into Major (Major, Department) values ('Physics', 'Science');
 
 -- eventually find a way to make username derived from email
 CREATE TABLE Student(
@@ -93,7 +100,7 @@ insert into Student (StudentID, FirstName, LastName, email, Year, Username, Pass
 insert into Student (StudentID, FirstName, LastName, email, Year, Username, Password, Major) values ('002606521', 'Orlan', 'Stagg', DEFAULT, 1, DEFAULT, 'V1vI0n', 'Electrical Engineering');
 insert into Student (StudentID, FirstName, LastName, email, Year, Username, Password, Major) values ('003585784', 'Melicent', 'Tarbett', DEFAULT, 1, DEFAULT, 'VzrA0k80ttM8', 'English');
 insert into Student (StudentID, FirstName, LastName, email, Year, Username, Password, Major) values ('007430669', 'Hollyanne', 'Medina', DEFAULT, 3, DEFAULT, 'R5mflG4', 'Health Science');
-insert into Student (StudentID, FirstName, LastName, email, Year, Username, Password, Major) values ('008692645', 'Lexi', 'Sherland', DEFAULT, 3, DEFAULT, '2GH3RLs2', 'History');
+insert into Student (StudentID, FirstName, LastName, email, Year, Username, Password, Major) values ('008692645', 'Lexi', 'Sherland', DEFAULT, 3, DEFAULT, '2GH3RLs2', 'Physics');
 
 CREATE TABLE Professor(
     ProfessorID INT NOT NULL,
@@ -132,7 +139,7 @@ CREATE TABLE Course(
 
 insert into Course (CourseSection, CourseName, Professor) values ('HS1000', 'Introduction to Health Science', '000827368');
 insert into Course (CourseSection, CourseName, Professor) values ('CS2560', 'Introduction to Machine Learning', '008360583');
-insert into Course (CourseSection, CourseName, Professor) values ('B1600', 'The art of Business', '008195942');
+insert into Course (CourseSection, CourseName, Professor) values ('B1600', 'The Art of The Deal', '008195942');
 insert into Course (CourseSection, CourseName, Professor) values ('B2700', 'Intermediate Market Analysis', '007418475');
 insert into Course (CourseSection, CourseName, Professor) values ('HS1500', 'Anatomy and Physiology', '008591029');
 
