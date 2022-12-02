@@ -1,5 +1,4 @@
 CREATE DATABASE criteaque;
-CREATE USER 'webapp'@'%' IDENTIFIED BY 'abc123';
 GRANT ALL PRIVILEGES ON criteaque.* TO 'webapp'@'%';
 FLUSH PRIVILEGES;
 
