@@ -9,17 +9,17 @@ CREATE TABLE Administrator(
     AdminID INT NOT NULL,
     FirstName VARCHAR(20) NOT NULL,
     LastName VARCHAR(20) NOT NULL,
-    Email VARCHAR(50) NOT NULL,
-    Username VARCHAR(20) NOT NULL,
+    Username VARCHAR(20) AS (CONCAT(LastName, ".", SUBSTRING(FirstName, 1, 2))),
+    Email VARCHAR(50) AS (CONCAT(Username, "@northeastern.edu")),
     Password VARCHAR(50) NOT NULL,
     PRIMARY KEY (AdminID)
 );
 
-insert into Administrator (AdminID, FirstName, LastName, Email, Username, Password) values ('07386', 'Spence', 'Antonowicz', 'Antonowicz.Spence@northeastern.edu', 'santonowicz0', 'chlwuP');
-insert into Administrator (AdminID, FirstName, LastName, Email, Username, Password) values ('07023', 'Lory', 'Duffet', 'Duffet.Lory@northeastern.edu', 'lduffet1', 'NaKkaejxd');
-insert into Administrator (AdminID, FirstName, LastName, Email, Username, Password) values ('03560', 'Malvina', 'Rebeiro', 'Rebeiro.Malvina@northeastern.edu', 'mrebeiro2', 'J8EMAdpVfQ');
-insert into Administrator (AdminID, FirstName, LastName, Email, Username, Password) values ('01090', 'Roby', 'Mincher', 'Mincher.Roby@northeastern.edu', 'rmincher3', 'SCQzWm');
-insert into Administrator (AdminID, FirstName, LastName, Email, Username, Password) values ('03031', 'Angelle', 'Schiementz', 'Schiementz.Angelle@northeastern.edu', 'aschiementz4', 'XgI8uNR1Y0');
+insert into Administrator (AdminID, FirstName, LastName, Email, Username, Password) values ('07386', 'Spence', 'Antonowicz', DEFAULT, DEFAULT, 'chlwuP');
+insert into Administrator (AdminID, FirstName, LastName, Email, Username, Password) values ('07023', 'Lory', 'Duffet', DEFAULT, DEFAULT, 'NaKkaejxd');
+insert into Administrator (AdminID, FirstName, LastName, Email, Username, Password) values ('03560', 'Malvina', 'Rebeiro', DEFAULT, DEFAULT, 'J8EMAdpVfQ');
+insert into Administrator (AdminID, FirstName, LastName, Email, Username, Password) values ('01090', 'Roby', 'Mincher', DEFAULT, DEFAULT, 'SCQzWm');
+insert into Administrator (AdminID, FirstName, LastName, Email, Username, Password) values ('03031', 'Angelle', 'Schiementz', DEFAULT, DEFAULT, 'XgI8uNR1Y0');
 
 CREATE TABLE Department(
     DepartmentName VARCHAR(50) NOT NULL,
@@ -74,9 +74,9 @@ CREATE TABLE Student(
     StudentID INT NOT NULL,
     FirstName VARCHAR(20) NOT NULL,
     LastName VARCHAR(20) NOT NULL,
-    Email VARCHAR(50) NOT NULL,
+    Username VARCHAR(20) AS (CONCAT(LastName, ".", SUBSTRING(FirstName, 1, 2))),
+    Email VARCHAR(50) AS (CONCAT(Username, "@northeastern.edu")),
     Year INT,
-    Username VARCHAR(20) NOT NULL,
     Password VARCHAR(50) NOT NULL,
     Major VARCHAR(50) NOT NULL,
     PRIMARY KEY (StudentID),
@@ -85,23 +85,23 @@ CREATE TABLE Student(
         REFERENCES Major(Major)
 );
 
-insert into Student (StudentID, FirstName, LastName, email, Year, Username, Password, Major) values ('008985560', 'Lyell', 'Goscar', 'Goscar.Lyell@northeastern.edu', 2, 'Goscar.Lyell', 'dIGdTj8Mg5N', 'Computer Science');
-insert into Student (StudentID, FirstName, LastName, email, Year, Username, Password, Major) values ('003207531', 'Kally', 'Cornick', 'Cornick.Kally@northeastern.edu', 1, 'Cornick.Kally', 't05d26eEIqW', 'English');
-insert into Student (StudentID, FirstName, LastName, email, Year, Username, Password, Major) values ('005623950', 'Annora', 'Gallagher', 'Gallagher.Annora@northeastern.edu', 1, 'Gallagher.Annora', 'Qre0RWyhj8', 'History');
-insert into Student (StudentID, FirstName, LastName, email, Year, Username, Password, Major) values ('002505878', 'Marcie', 'Blesli', 'Blesli.Marcie@northeastern.edu', 4, 'Blesli.Marcie', 'tmWuT7w', 'Business Administration');
-insert into Student (StudentID, FirstName, LastName, email, Year, Username, Password, Major) values ('007110349', 'Jeno', 'Huckster', 'Huckster.Jeno@northeastern.edu', 4, 'Huckster.Jeno', 'OvV7jngnz233', 'Mechanical Engineering');
-insert into Student (StudentID, FirstName, LastName, email, Year, Username, Password, Major) values ('000851446', 'Blair', 'Cornfoot', 'Cornfoot.Blair@northeastern.edu', 5, 'Cornfoot.Blair', 'kf2dp85RJ9XA', 'Computer Science');
-insert into Student (StudentID, FirstName, LastName, email, Year, Username, Password, Major) values ('002606521', 'Orlan', 'Stagg', 'Stagg.Orlan@northeastern.edu', 1, 'Stagg.Orlan', 'V1vI0n', 'Electrical Engineering');
-insert into Student (StudentID, FirstName, LastName, email, Year, Username, Password, Major) values ('003585784', 'Melicent', 'Tarbett', 'Tarbett.Melicent@northeastern.edu', 1, 'Tarbett.Melicent', 'VzrA0k80ttM8', 'English');
-insert into Student (StudentID, FirstName, LastName, email, Year, Username, Password, Major) values ('007430669', 'Hollyanne', 'Medina', 'Medina.Hollyanne@northeastern.edu', 3, 'Medina.Hollyanne', 'R5mflG4', 'Health Science');
-insert into Student (StudentID, FirstName, LastName, email, Year, Username, Password, Major) values ('008692645', 'Lexi', 'Sherland', 'Sherland.Lexi@northeastern.edu', 3, 'Sherland.Lexi', '2GH3RLs2', 'History');
+insert into Student (StudentID, FirstName, LastName, email, Year, Username, Password, Major) values ('008985560', 'Lyell', 'Goscar', DEFAULT, 2, DEFAULT, 'dIGdTj8Mg5N', 'Computer Science');
+insert into Student (StudentID, FirstName, LastName, email, Year, Username, Password, Major) values ('003207531', 'Kally', 'Cornick', DEFAULT, 1, DEFAULT, 't05d26eEIqW', 'English');
+insert into Student (StudentID, FirstName, LastName, email, Year, Username, Password, Major) values ('005623950', 'Annora', 'Gallagher', DEFAULT, 1, DEFAULT, 'Qre0RWyhj8', 'History');
+insert into Student (StudentID, FirstName, LastName, email, Year, Username, Password, Major) values ('002505878', 'Marcie', 'Blesli', DEFAULT, 4, DEFAULT, 'tmWuT7w', 'Business Administration');
+insert into Student (StudentID, FirstName, LastName, email, Year, Username, Password, Major) values ('007110349', 'Jeno', 'Huckster', DEFAULT, 4, DEFAULT, 'OvV7jngnz233', 'Mechanical Engineering');
+insert into Student (StudentID, FirstName, LastName, email, Year, Username, Password, Major) values ('000851446', 'Blair', 'Cornfoot', DEFAULT, 5, DEFAULT, 'kf2dp85RJ9XA', 'Computer Science');
+insert into Student (StudentID, FirstName, LastName, email, Year, Username, Password, Major) values ('002606521', 'Orlan', 'Stagg', DEFAULT, 1, DEFAULT, 'V1vI0n', 'Electrical Engineering');
+insert into Student (StudentID, FirstName, LastName, email, Year, Username, Password, Major) values ('003585784', 'Melicent', 'Tarbett', DEFAULT, 1, DEFAULT, 'VzrA0k80ttM8', 'English');
+insert into Student (StudentID, FirstName, LastName, email, Year, Username, Password, Major) values ('007430669', 'Hollyanne', 'Medina', DEFAULT, 3, DEFAULT, 'R5mflG4', 'Health Science');
+insert into Student (StudentID, FirstName, LastName, email, Year, Username, Password, Major) values ('008692645', 'Lexi', 'Sherland', DEFAULT, 3, DEFAULT, '2GH3RLs2', 'History');
 
 CREATE TABLE Professor(
     ProfessorID INT NOT NULL,
     FirstName VARCHAR(20) NOT NULL,
     LastName VARCHAR(20) NOT NULL,
-    Email VARCHAR(50) NOT NULL,
-    Username VARCHAR(20) NOT NULL,
+    Username VARCHAR(20) AS (CONCAT(LastName, ".", SUBSTRING(FirstName, 1, 2))),
+    Email VARCHAR(50) AS (CONCAT(Username, "@northeastern.edu")),
     Password VARCHAR(50) NOT NULL,
     Tenured BOOLEAN NOT NULL,
     SchoolAttended VARCHAR(50) NOT NULL,
@@ -114,11 +114,11 @@ CREATE TABLE Professor(
         REFERENCES Department(DepartmentName)
 );
 
-insert into Professor (ProfessorID, FirstName, LastName, email, Username, Password, Tenured, SchoolAttended, HighestDegree, YearsTaught, Department) values ('000827368', 'Isaiah', 'Adamowitz', 'Adamowitz.Isaiah@northeastern.edu', 'Adamowitz.Isaiah', 'GSQ4WrHKlzZ', false, 'Fordham University', 'Masters', 22, 'Health Science');
-insert into Professor (ProfessorID, FirstName, LastName, email, Username, Password, Tenured, SchoolAttended, HighestDegree, YearsTaught, Department) values ('008360583', 'Norry', 'Bassick', 'Bassick.Norry@northeastern.edu', 'Bassick.Norry', 'CN7D1SAeNLH', true, 'Universidad Andina Simón Bolivar', 'Masters', 10, 'Engineering');
-insert into Professor (ProfessorID, FirstName, LastName, email, Username, Password, Tenured, SchoolAttended, HighestDegree, YearsTaught, Department) values ('008195942', 'Humfrid', 'Clemo', 'Clemo.Humfrid@northeastern.edu', 'Clemo.Humfrid', 'qMBVAb2mo', true, 'The Art Institutes International Portland', 'PhD', 10, 'Business');
-insert into Professor (ProfessorID, FirstName, LastName, email, Username, Password, Tenured, SchoolAttended, HighestDegree, YearsTaught, Department) values ('007418475', 'Meggy', 'Spinks', 'Spinks.Meggy@northeastern.edu', 'Spinks.Meggy', 'Ip5idMAoTsCK', true, 'Hochschule Bremen', 'PhD', 8, 'Business');
-insert into Professor (ProfessorID, FirstName, LastName, email, Username, Password, Tenured, SchoolAttended, HighestDegree, YearsTaught, Department) values ('008591029', 'Kath', 'Hardy-Piggin', 'Hardy-Piggin.Kath@northeastern.edu', 'Hardy-Piggin.Kath', 'ZiZtoEgPjRd', false, 'KDU College Sdn Bhd', 'PhD', 29, 'Health Science');
+insert into Professor (ProfessorID, FirstName, LastName, email, Username, Password, Tenured, SchoolAttended, HighestDegree, YearsTaught, Department) values ('000827368', 'Isaiah', 'Adamowitz', DEFAULT, DEFAULT, 'GSQ4WrHKlzZ', false, 'Fordham University', 'Masters', 22, 'Health Science');
+insert into Professor (ProfessorID, FirstName, LastName, email, Username, Password, Tenured, SchoolAttended, HighestDegree, YearsTaught, Department) values ('008360583', 'Norry', 'Bassick', DEFAULT, DEFAULT, 'CN7D1SAeNLH', true, 'Universidad Andina Simón Bolivar', 'Masters', 10, 'Engineering');
+insert into Professor (ProfessorID, FirstName, LastName, email, Username, Password, Tenured, SchoolAttended, HighestDegree, YearsTaught, Department) values ('008195942', 'Humfrid', 'Clemo', DEFAULT, DEFAULT, 'qMBVAb2mo', true, 'The Art Institutes International Portland', 'PhD', 10, 'Business');
+insert into Professor (ProfessorID, FirstName, LastName, email, Username, Password, Tenured, SchoolAttended, HighestDegree, YearsTaught, Department) values ('007418475', 'Meggy', 'Spinks', DEFAULT, DEFAULT, 'Ip5idMAoTsCK', true, 'Hochschule Bremen', 'PhD', 8, 'Business');
+insert into Professor (ProfessorID, FirstName, LastName, email, Username, Password, Tenured, SchoolAttended, HighestDegree, YearsTaught, Department) values ('008591029', 'Kath', 'Hardy-Piggin', DEFAULT, DEFAULT, 'ZiZtoEgPjRd', false, 'KDU College Sdn Bhd', 'PhD', 29, 'Health Science');
 
 CREATE TABLE Course(
     CourseSection VARCHAR(10) NOT NULL,
