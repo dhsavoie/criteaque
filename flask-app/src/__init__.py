@@ -31,9 +31,9 @@ def create_app():
     from src.professors.professors  import professors
 
     # Register the routes that we just imported so they can be properly handled
-    app.register_blueprint(views,       url_prefix='/classic')
-    app.register_blueprint(students,   url_prefix='/classic')
-    app.register_blueprint(professors,    url_prefix='/classic')
-    app.register_blueprint(admins,     url_prefix='/classic')
+    app.register_blueprint(views,       url_prefix='/view')
+    app.register_blueprint(students,   url_prefix='/stu')
+    app.register_blueprint(professors,    url_prefix='/prof')
+    app.register_blueprint(admins,     url_prefix='/adm')
 
     return app
