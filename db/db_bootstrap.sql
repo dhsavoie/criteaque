@@ -33,11 +33,8 @@ insert into Department (DepartmentName, NumOfStudents, NumOfProfessors) values (
 insert into Department (DepartmentName, NumOfStudents, NumOfProfessors) values ('Business', 126, 2);
 insert into Department (DepartmentName, NumOfStudents, NumOfProfessors) values ('Social Sciences', 396, 27);
 insert into Department (DepartmentName, NumOfStudents, NumOfProfessors) values ('Computer Science', 619, 33);
-insert into Department (DepartmentName, NumOfStudents, NumOfProfessors) values ('Social Sciences', 844, 18);
-insert into Department (DepartmentName, NumOfStudents, NumOfProfessors) values ('Social Sciences', 445, 78);
-insert into Department (DepartmentName, NumOfStudents, NumOfProfessors) values ('Business', 852, 44);
-insert into Department (DepartmentName, NumOfStudents, NumOfProfessors) values ('Business', 123, 87);
-insert into Department (DepartmentName, NumOfStudents, NumOfProfessors) values ('Science', 497, 33);
+insert into Department (DepartmentName, NumOfStudents, NumOfProfessors) values ('Engineering', 852, 44);
+insert into Department (DepartmentName, NumOfStudents, NumOfProfessors) values ('Art and Design', 497, 33);
 
 CREATE TABLE AdminDepartment(
     AdminID INT NOT NULL,
