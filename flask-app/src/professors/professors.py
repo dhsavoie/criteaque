@@ -59,3 +59,49 @@ def get_prof_courses():
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
+
+# this is a route to get the average ratings for each category for a professor in a specific course
+@professors.route('/prof_ratings', methods=['POST'])
+def get_prof_ratings():
+    req_review = request.form
+    cursor = db.get_db().cursor()
+    prof_fname = req_review['Name'].split()[0]
+    prof_lname = req_review['Name'].split()[1]
+    # get professor id from first and last name
+    cursor.execute('select ProfessorID from Professor where FirstName = %s and LastName = %s', (prof_fname, prof_lname))
+    ProfessorID = cursor.fetchone()[0]
+    course = req_review['Course']
+    # execute query to get ratings from reviews for the professor
+    cursor.execute(f"select AVG(WorkloadRating) as WL_Rating, AVG(DifficultyRating) as D_Rating, AVG(EngagementRating) as E_Rating from Review where ProfessorReviewed = {ProfessorID} and Class = '{course}'")
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+# this is a route to get all the reviews for a professor in a specific course
+@professors.route('/prof_reviews', methods=['POST'])
+def get_prof_reviews():
+    req_review = request.form
+    cursor = db.get_db().cursor()
+    prof_fname = req_review['Name'].split()[0]
+    prof_lname = req_review['Name'].split()[1]
+    # get professor id from first and last name
+    cursor.execute('select ProfessorID from Professor where FirstName = %s and LastName = %s', (prof_fname, prof_lname))
+    ProfessorID = cursor.fetchone()[0]
+    course = req_review['Course']
+    # execute query to get ratings from reviews for the professor
+    cursor.execute(f"select DifficultyRating, EngagementRating, WorkloadRating, ReviewContent from Review where ProfessorReviewed = {ProfessorID} and Class = '{course}'")
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
