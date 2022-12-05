@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, make_response
+from flask import Blueprint, request, jsonify, make_response, current_app
 import json
 from src import db
 
@@ -20,28 +20,28 @@ def get_majors():
     the_response.mimetype = 'application/json'
     return the_response # return the data as a JSON response
 
-# # Get all the admins from the database
-# @admins.route('/admins', methods=['GET'])
-# def get_admins():
-#     # get a cursor object from the database
-#     cursor = db.get_db().cursor()
+    # this is a post route for adding a new user
+@admins.route('/add_student', methods=['POST'])
+def add_student():
+    # get the data from the request
+    review = request.form
+    current_app.logger.info(review) # log the data to the console
+    cursor = db.get_db().cursor() # get a cursor object from the database
 
-#     # use cursor to query the database for a list of admins
-#     cursor.execute('select adminCode, adminName, adminVendor from admins')
+    # get the data from the form
+    ReviewContent = review['ReviewContent']
+    Class = review['Class']
+    WorkloadRating = review['WorkloadRating']
+    DifficultyRating = review['DifficultyRating']
+    EngagementRating = review['EngagementRating']
+    StudentReviewer = review['StudentReviewer']
+    ProfessorReviewed = review['ProfessorReviewed']
 
-#     # grab the column headers from the returned data
-#     column_headers = [x[0] for x in cursor.description]
-
-#     # create an empty dictionary object to use in 
-#     # putting column headers together with data
-#     json_data = []
-
-#     # fetch all the data from the cursor
-#     theData = cursor.fetchall()
-
-#     # for each of the rows, zip the data elements together with
-#     # the column headers. 
-#     for row in theData:
-#         json_data.append(dict(zip(column_headers, row)))
-
-#     return jsonify(json_data)
+    # insert review data into the database
+    query = f"""INSERT INTO Review (ReviewContent, Class, WorkloadRating, DifficultyRating, EngagementRating, StudentReviewer, 
+    ProfessorReviewed) VALUES ('{ReviewContent}', '{Class}', {WorkloadRating}, {DifficultyRating}, {EngagementRating}, 
+    {StudentReviewer}, {ProfessorID})"""
+    current_app.logger.info(query)
+    cursor.execute(query)
+    db.get_db().commit()
+    return "Success! Review added"
