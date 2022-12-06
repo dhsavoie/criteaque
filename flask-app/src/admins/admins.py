@@ -24,23 +24,24 @@ def get_majors():
 @admins.route('/add_student', methods=['POST'])
 def add_student():
     # get the data from the request
-    review = request.form
-    current_app.logger.info(review) # log the data to the console
+    student = request.form
+    current_app.logger.info(student) # log the data to the console
     cursor = db.get_db().cursor() # get a cursor object from the database
 
+# insert into Student (StudentID, FirstName, LastName, email, Year, Username, Password, Major) values 
+# ('008985560', 'Lyell', 'Goscar', DEFAULT, 2, DEFAULT, 'dIGdTj8Mg5N', 'Computer Science');
+
     # get the data from the form
-    ReviewContent = review['ReviewContent']
-    Class = review['Class']
-    WorkloadRating = review['WorkloadRating']
-    DifficultyRating = review['DifficultyRating']
-    EngagementRating = review['EngagementRating']
-    StudentReviewer = review['StudentReviewer']
-    ProfessorReviewed = review['ProfessorReviewed']
+    FirstName = student['FirstName']
+    LastName = student['LastName']
+    StudentID = student['StudentID']
+    Year = student['Year']
+    Major = student['Major']
+    Password = student['Password']
 
     # insert review data into the database
-    query = f"""INSERT INTO Review (ReviewContent, Class, WorkloadRating, DifficultyRating, EngagementRating, StudentReviewer, 
-    ProfessorReviewed) VALUES ('{ReviewContent}', '{Class}', {WorkloadRating}, {DifficultyRating}, {EngagementRating}, 
-    {StudentReviewer}, {ProfessorID})"""
+    query = f"""INSERT INTO Student (FirstName, LastName, StudentID, Year,  Major, Password) 
+    VALUES ('{FirstName}', '{LastName}', {StudentID}, {Year}, {Major}, {Password})"""
     current_app.logger.info(query)
     cursor.execute(query)
     db.get_db().commit()
