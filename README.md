@@ -1,10 +1,22 @@
-# MySQL + Flask Boilerplate Project
+# Criteaque- Professor Review System
+## David Savoie and Darayus Gorimaar- CS3200
+
+Our project is a professor review system. The goal of this project is to allow students to rate and review their professors. This will allow students to make informed decisions about which professors to take. This will also allow professors to see how they are doing and what they can improve on.
+
+This version of the project contains 4 main features: add a review, see a review, add student user and add professor user.
+
+Link to video review: https://www.youtube.com/watch?v=5BfQeYt9aFY
+
+
+
+
+### MySQL + Flask Boilerplate Project
 
 This repo contains a boilerplate setup for spinning up 2 docker containers: 
 1. A MySQL 8 container for obvious reasons
 1. A Python Flask container to implement a REST API
 
-## How to setup and start the containers
+#### How to setup and start the containers
 **Important** - you need Docker Desktop installed
 
 1. Clone this repository.  
@@ -14,12 +26,9 @@ This repo contains a boilerplate setup for spinning up 2 docker containers:
 1. Build the images with `docker compose build`
 1. Start the containers with `docker compose up`.  To run in detached mode, run `docker compose up -d`. 
 
-## For setting up a Conda Web-Dev environment:
+#### For setting up a Conda Web-Dev environment:
 
 1. `conda create -n webdev python=3.9`
 1. `conda activate webdev`
 1. `pip install flask flask-mysql flask-restful cryptography flask-login`
 
-
-
-TEST
