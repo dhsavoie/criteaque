@@ -36,3 +36,18 @@ def add_review():
     cursor.execute(query)
     db.get_db().commit()
     return "Success! Review added"
+
+# this is a route to get a list of all student Users
+@students.route('/student_users', methods=['GET'])
+def get_student_users():
+    cursor = db.get_db().cursor()
+    cursor.execute('select StudentID, FirstName, LastName from Student')
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
